@@ -1,0 +1,31 @@
+<button (click)="isBordered=!isBordered">Toggle Border</button>
+<p [appMessage]="message">Click Here</p>
+<img [src]="imgUrl"/>
+Search : <input type="text" [(ngModel)]="searchString"/>
+{{searchString}}
+
+<app-product/>
+<div *ngIf="!submitted" [class.bordered]="isBordered">
+  
+  <form>
+    <label>User Name</label>
+    <input type="text" #username /><br /><br />
+    <label for="password">Password</label>
+    <input type="password" name="password" #password /><br />
+  </form>
+  <button (click)="onSubmit(username.value, password.value)">Login</button>
+</div>
+<div *ngIf="submitted">
+  <div *ngIf="isAuthenticated; else failureMsg">
+    <h4>Welcome {{ userName }}</h4>
+    <app-my-list></app-my-list>
+    <app-scdc></app-scdc>
+
+    <p *appRepeat="10">Hello I will be repeated!</p>
+
+  </div>
+  <ng-template #failureMsg>
+    <h4>Invalid Login !!! Please try again...</h4>
+  </ng-template>
+  <button type="button" (click)="submitted = false">Back</button>
+</div>
